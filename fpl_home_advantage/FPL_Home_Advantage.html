@@ -58,24 +58,54 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="FPL_Home_Advantage_files/libs/clipboard/clipboard.min.js"></script>
-<script src="FPL_Home_Advantage_files/libs/quarto-html/quarto.js"></script>
-<script src="FPL_Home_Advantage_files/libs/quarto-html/popper.min.js"></script>
-<script src="FPL_Home_Advantage_files/libs/quarto-html/tippy.umd.min.js"></script>
-<script src="FPL_Home_Advantage_files/libs/quarto-html/anchor.min.js"></script>
-<link href="FPL_Home_Advantage_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="FPL_Home_Advantage_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="FPL_Home_Advantage_files/libs/bootstrap/bootstrap.min.js"></script>
-<link href="FPL_Home_Advantage_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="FPL_Home_Advantage_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
 
 
 </head>
 
 <body class="fullcontent">
 
-<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
-
+<div id="quarto-search-results"></div>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
@@ -117,7 +147,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotrix)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>source_string <span class="ot">&lt;-</span> <span class="st">'Source: https://github.com/vaastav/Fantasy-Premier-League; Jerome Williams'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>source_string <span class="ot">&lt;-</span> <span class="st">'Source: https://github.com/vaastav/Fantasy-Premier-League; Jerome Williams'</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>theme_jw <span class="ot">&lt;-</span> <span class="cf">function</span>() { </span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">'bold'</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.caption =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="dv">0</span>)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="data" class="level2">
 <h2 class="anchored" data-anchor-id="data">Data</h2>
@@ -408,15 +447,17 @@ dbl (2): gw1count, gw38count
 <h2 class="anchored" data-anchor-id="plotting-home-advantage">Plotting home advantage</h2>
 <p>Now that we’ve established that filtering out observations with ‘% selected by’ less than 0.5% is sensible, let’s proceed with analyzing player-level home advantage in FPL points.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>home_away_stats <span class="ot">&lt;-</span> gw <span class="sc">%&gt;%</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(pct_selected <span class="sc">&gt;=</span> <span class="fl">0.005</span>) <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>home_away_data <span class="ot">&lt;-</span> gw <span class="sc">%&gt;%</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(pct_selected <span class="sc">&gt;=</span> <span class="fl">0.05</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">home_away =</span> <span class="fu">if_else</span>(was_home, <span class="st">'Home'</span>, <span class="st">'Away'</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">home_away =</span> <span class="fu">as_factor</span>(home_away) <span class="sc">%&gt;%</span> <span class="fu">fct_relevel</span>(<span class="st">'Home'</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(home_away, season) <span class="sc">%&gt;%</span></span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">total_points_mean =</span> <span class="fu">mean</span>(total_points),</span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">total_points_se =</span> <span class="fu">std.error</span>(total_points)</span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">home_away =</span> <span class="fu">as_factor</span>(home_away) <span class="sc">%&gt;%</span> <span class="fu">fct_relevel</span>(<span class="st">'Home'</span>))</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>home_away_stats <span class="ot">&lt;-</span> home_away_data <span class="sc">%&gt;%</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(home_away, season) <span class="sc">%&gt;%</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">total_points_mean =</span> <span class="fu">mean</span>(total_points),</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">total_points_se =</span> <span class="fu">std.error</span>(total_points)</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>`summarise()` has grouped output by 'home_away'. You can override using the
 `.groups` argument.</code></pre>
@@ -503,10 +544,159 @@ dbl (2): gw1count, gw38count
 </tbody>
 </table>
 <p>Source: <a href="https://fantasy.premierleague.com/help/rules">https://fantasy.premierleague.com/help/rules</a></p>
+<p>Let’s plot the average count for all point-scoring actions by home and away. For this analysis, we will exclude the 2020/21 season, since home advantage did not accrue.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>df_for_source_analysis <span class="ot">&lt;-</span> home_away_data <span class="sc">%&gt;%</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(season <span class="sc">!=</span> <span class="st">'2020/21'</span>)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>vars_for_all_players <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="st">'minutes'</span>, </span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>                             <span class="st">'goals_scored'</span>,</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>                             <span class="st">'assists'</span>,</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>                             <span class="st">'bonus'</span>,</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>                             <span class="st">'red_cards'</span>,</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>                             <span class="st">'yellow_cards'</span>)</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>calc_stats <span class="ot">&lt;-</span> <span class="cf">function</span>(df, var_, ...) {</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tibble</span>(<span class="at">mean =</span> <span class="fu">mean</span>(df[var_] <span class="sc">%&gt;%</span> <span class="fu">pull</span>()),</span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>         <span class="at">se =</span> <span class="fu">std.error</span>(df[var_]))</span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>all_stats <span class="ot">&lt;-</span> <span class="fu">tibble</span>()</span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (var <span class="cf">in</span> vars_for_all_players) {</span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a>  temp <span class="ot">&lt;-</span> df_for_source_analysis <span class="sc">%&gt;%</span> </span>
+<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(home_away) <span class="sc">%&gt;%</span></span>
+<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_modify</span>(<span class="cf">function</span>(df, ...) { <span class="fu">calc_stats</span>(df, var, ...) }) <span class="sc">%&gt;%</span></span>
+<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">var =</span> var) <span class="sc">%&gt;%</span></span>
+<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">var =</span> <span class="fu">case_when</span>(var <span class="sc">==</span> <span class="st">'assists'</span> <span class="sc">~</span> <span class="st">'Assists'</span>,</span>
+<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a>                           var <span class="sc">==</span> <span class="st">'goals_scored'</span> <span class="sc">~</span> <span class="st">'Goals scored'</span>,</span>
+<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a>                           var <span class="sc">==</span> <span class="st">'bonus'</span> <span class="sc">~</span> <span class="st">'Bonus points'</span>,</span>
+<span id="cb24-25"><a href="#cb24-25" aria-hidden="true" tabindex="-1"></a>                           var <span class="sc">==</span> <span class="st">'minutes'</span> <span class="sc">~</span> <span class="st">'Minutes played'</span>,</span>
+<span id="cb24-26"><a href="#cb24-26" aria-hidden="true" tabindex="-1"></a>                           var <span class="sc">==</span> <span class="st">'red_cards'</span> <span class="sc">~</span> <span class="st">'Red cards'</span>,</span>
+<span id="cb24-27"><a href="#cb24-27" aria-hidden="true" tabindex="-1"></a>                           var <span class="sc">==</span> <span class="st">'yellow_cards'</span> <span class="sc">~</span> <span class="st">'Yellow cards'</span>))</span>
+<span id="cb24-28"><a href="#cb24-28" aria-hidden="true" tabindex="-1"></a>  all_stats <span class="ot">&lt;-</span> all_stats <span class="sc">%&gt;%</span> <span class="fu">bind_rows</span>(temp)</span>
+<span id="cb24-29"><a href="#cb24-29" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb24-30"><a href="#cb24-30" aria-hidden="true" tabindex="-1"></a>all_stats</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 12 × 4
+   home_away     mean       se var           
+   &lt;fct&gt;        &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;         
+ 1 Home      68.7     0.375    Minutes played
+ 2 Away      67.7     0.383    Minutes played
+ 3 Home       0.157   0.00472  Goals scored  
+ 4 Away       0.122   0.00408  Goals scored  
+ 5 Home       0.124   0.00401  Assists       
+ 6 Away       0.0979  0.00360  Assists       
+ 7 Home       0.358   0.00916  Bonus points  
+ 8 Away       0.286   0.00834  Bonus points  
+ 9 Home       0.00288 0.000574 Red cards     
+10 Away       0.00313 0.000601 Red cards     
+11 Home       0.0871  0.00302  Yellow cards  
+12 Away       0.100   0.00323  Yellow cards  </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>def_gk <span class="ot">&lt;-</span> df_for_source_analysis <span class="sc">%&gt;%</span> <span class="fu">filter</span>(position <span class="sc">==</span> <span class="st">'GK'</span> <span class="sc">|</span> position <span class="sc">==</span> <span class="st">'DEF'</span>)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>def_gk_vars <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="st">'clean_sheets'</span>, <span class="st">'goals_conceded'</span>)</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>def_gk_stats <span class="ot">&lt;-</span> <span class="fu">tibble</span>()</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (var_ <span class="cf">in</span> def_gk_vars) {</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>  temp <span class="ot">&lt;-</span> def_gk <span class="sc">%&gt;%</span> </span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(home_away) <span class="sc">%&gt;%</span></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_modify</span>(<span class="cf">function</span>(df, ...) { <span class="fu">calc_stats</span>(df, var_, ...) }) <span class="sc">%&gt;%</span></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="st">'var'</span> <span class="ot">=</span> var_)</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>  def_gk_stats <span class="ot">&lt;-</span> def_gk_stats <span class="sc">%&gt;%</span> <span class="fu">bind_rows</span>(temp)</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>def_gk_stats <span class="ot">&lt;-</span> def_gk_stats <span class="sc">%&gt;%</span></span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">var =</span> <span class="fu">case_when</span>(var <span class="sc">==</span> <span class="st">'clean_sheets'</span> <span class="sc">~</span> <span class="st">'Clean sheets'</span>,</span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>                         var <span class="sc">==</span> <span class="st">'goals_conceded'</span> <span class="sc">~</span> <span class="st">'Goals conceded'</span>))</span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>gk_only <span class="ot">&lt;-</span> df_for_source_analysis <span class="sc">%&gt;%</span> <span class="fu">filter</span>(position <span class="sc">==</span> <span class="st">'GK'</span>)</span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>gk_only_stats <span class="ot">&lt;-</span> gk_only <span class="sc">%&gt;%</span></span>
+<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(home_away) <span class="sc">%&gt;%</span></span>
+<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_modify</span>(<span class="cf">function</span>(df, ...) { <span class="fu">calc_stats</span>(df, <span class="st">'saves'</span>, ...)}) <span class="sc">%&gt;%</span></span>
+<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">'var'</span> <span class="ot">=</span> <span class="st">'Saves'</span>)</span>
+<span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-22"><a href="#cb26-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-23"><a href="#cb26-23" aria-hidden="true" tabindex="-1"></a>plotting_data <span class="ot">&lt;-</span> all_stats <span class="sc">%&gt;%</span> </span>
+<span id="cb26-24"><a href="#cb26-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_rows</span>(def_gk_stats) <span class="sc">%&gt;%</span></span>
+<span id="cb26-25"><a href="#cb26-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_rows</span>(gk_only_stats) <span class="sc">%&gt;%</span></span>
+<span id="cb26-26"><a href="#cb26-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">var =</span> <span class="fu">fct_relevel</span>(var, <span class="fu">c</span>(<span class="st">'Goals scored'</span>, <span class="st">'Assists'</span>, <span class="st">'Minutes played'</span>, </span>
+<span id="cb26-27"><a href="#cb26-27" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">'Bonus points'</span>, <span class="st">'Red cards'</span>, <span class="st">'Yellow cards'</span>,</span>
+<span id="cb26-28"><a href="#cb26-28" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">'Goals conceded'</span>, <span class="st">'Clean sheets'</span>, <span class="st">'Saves'</span>)))</span>
+<span id="cb26-29"><a href="#cb26-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-30"><a href="#cb26-30" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(plotting_data, <span class="fu">aes</span>(<span class="at">x =</span> home_away, <span class="at">color =</span> home_away)) <span class="sc">+</span></span>
+<span id="cb26-31"><a href="#cb26-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y =</span> mean)) <span class="sc">+</span></span>
+<span id="cb26-32"><a href="#cb26-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_linerange</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> mean <span class="sc">-</span> <span class="fl">1.96</span> <span class="sc">*</span> se, <span class="at">ymax =</span> mean <span class="sc">+</span> <span class="fl">1.96</span> <span class="sc">*</span> se)) <span class="sc">+</span></span>
+<span id="cb26-33"><a href="#cb26-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>var, <span class="at">scales =</span> <span class="st">'free'</span>) <span class="sc">+</span></span>
+<span id="cb26-34"><a href="#cb26-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">'Home advantage in FPL point-scoring actions'</span>,</span>
+<span id="cb26-35"><a href="#cb26-35" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">'Fantasy Premier League, 2016/17 to 2022/23'</span>,</span>
+<span id="cb26-36"><a href="#cb26-36" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">'Source: https://github.com/vaastav/Fantasy-Premier-League; Jerome Williams</span></span>
+<span id="cb26-37"><a href="#cb26-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-38"><a href="#cb26-38" aria-hidden="true" tabindex="-1"></a><span class="st">Note: Plots show means and 95% confidence intervals.</span></span>
+<span id="cb26-39"><a href="#cb26-39" aria-hidden="true" tabindex="-1"></a><span class="st">Calculations exclude 2020/21 season and player-gameweeks with selected-by rates lower than 0.5%.</span></span>
+<span id="cb26-40"><a href="#cb26-40" aria-hidden="true" tabindex="-1"></a><span class="sc">\'</span><span class="st">Goals conceded</span><span class="sc">\'</span><span class="st"> and </span><span class="sc">\'</span><span class="st">Clean sheets</span><span class="sc">\'</span><span class="st"> calculated for defenders and goalkeepers only. </span><span class="sc">\'</span><span class="st">Saves</span><span class="sc">\'</span><span class="st"> calculated for goalkeepers only.'</span>,</span>
+<span id="cb26-41"><a href="#cb26-41" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> <span class="st">''</span>,</span>
+<span id="cb26-42"><a href="#cb26-42" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">''</span>, </span>
+<span id="cb26-43"><a href="#cb26-43" aria-hidden="true" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">''</span>) <span class="sc">+</span></span>
+<span id="cb26-44"><a href="#cb26-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">'none'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="FPL_Home_Advantage_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>The plot shows that there are significant difference between home and away matches in most FPL point-scoring actions. (I omit penalties missed and penalties saved above because they are rare events.)</p>
+<p>Unsurprisingly, given their rarity, there is no difference detectable difference between home and away games with respect to the average number of red cards.</p>
+<p>Perhaps surprisingly, the average number of minutes played is slightly higher for home games than for away games. The difference is small however (approximately 68.5 minutes for home games vs 67.75 minutes for away games) and is therefore unlikely to be meaningful for FPL points.</p>
+<p>Let’s also examine home advantage by player position (GK, DEF, MID, and FWD). Given that most point-scoring actions, including both attacking actions (goals, assists) and defensive actions (clean sheets, goals conceded, saves), exhibit home advantage, we expect to find home advantage across all four positions as well.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>df_for_position_analysis <span class="ot">&lt;-</span> home_away_data <span class="sc">%&gt;%</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(season <span class="sc">!=</span> <span class="st">'2020/21'</span>)</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>var <span class="ot">=</span> <span class="st">'total_points'</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>calculate_stats <span class="ot">&lt;-</span> <span class="cf">function</span>(df) {</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>  mean_ <span class="ot">&lt;-</span> <span class="fu">mean</span>(df[var] <span class="sc">%&gt;%</span> <span class="fu">pull</span>())</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>  se_ <span class="ot">&lt;-</span> <span class="fu">std.error</span>(df[var])</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tibble</span>(</span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">position =</span> df<span class="sc">$</span>position[<span class="dv">1</span>],</span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">home_away =</span> df<span class="sc">$</span>home_away[<span class="dv">1</span>],</span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean =</span> mean_,</span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">se =</span> se_)</span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a><span class="co"># gw %&gt;%</span></span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a><span class="co">#   split(list(.$season, .$was_home)) %&gt;%</span></span>
+<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a><span class="co">#   map(calculate_stats) %&gt;%</span></span>
+<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a><span class="co">#   list_rbind()</span></span>
+<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a>pos_stats <span class="ot">&lt;-</span> df_for_position_analysis <span class="sc">%&gt;%</span></span>
+<span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">split</span>(<span class="fu">list</span>(.<span class="sc">$</span>position, .<span class="sc">$</span>home_away)) <span class="sc">%&gt;%</span></span>
+<span id="cb27-22"><a href="#cb27-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(calculate_stats) <span class="sc">%&gt;%</span></span>
+<span id="cb27-23"><a href="#cb27-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list_rbind</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb27-24"><a href="#cb27-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb27-25"><a href="#cb27-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">position =</span> <span class="fu">as_factor</span>(position) <span class="sc">%&gt;%</span> <span class="fu">fct_relevel</span>(<span class="fu">c</span>(<span class="st">'GK'</span>, <span class="st">'DEF'</span>, <span class="st">'MID'</span>, <span class="st">'FWD'</span>))</span>
+<span id="cb27-26"><a href="#cb27-26" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb27-27"><a href="#cb27-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-28"><a href="#cb27-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-29"><a href="#cb27-29" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(pos_stats, <span class="fu">aes</span>(<span class="at">x =</span> position, <span class="at">color =</span> home_away, <span class="at">group =</span> home_away)) <span class="sc">+</span> </span>
+<span id="cb27-30"><a href="#cb27-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y =</span> mean)) <span class="sc">+</span></span>
+<span id="cb27-31"><a href="#cb27-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_linerange</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> mean <span class="sc">-</span> <span class="dv">2</span> <span class="sc">*</span> se, <span class="at">ymax =</span> mean <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> se)) <span class="sc">+</span></span>
+<span id="cb27-32"><a href="#cb27-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_jw</span>() <span class="sc">+</span></span>
+<span id="cb27-33"><a href="#cb27-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">'Home advantage in FPL points, by player position'</span>,</span>
+<span id="cb27-34"><a href="#cb27-34" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">'Fantasy Premier League, 2016/17 to 2022/23'</span>,</span>
+<span id="cb27-35"><a href="#cb27-35" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">''</span>,</span>
+<span id="cb27-36"><a href="#cb27-36" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">'Points per player per gameweek'</span>,</span>
+<span id="cb27-37"><a href="#cb27-37" aria-hidden="true" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">''</span>,</span>
+<span id="cb27-38"><a href="#cb27-38" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">'Source: https://github.com/vaastav/Fantasy-Premier-League; Jerome Williams</span></span>
+<span id="cb27-39"><a href="#cb27-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-40"><a href="#cb27-40" aria-hidden="true" tabindex="-1"></a><span class="st">Plot shows means and 95% confidence intervals.</span></span>
+<span id="cb27-41"><a href="#cb27-41" aria-hidden="true" tabindex="-1"></a><span class="st">Calculations exclude 2020/21 season and player-gameweeks with selected-by rates lower than 0.5%.'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="FPL_Home_Advantage_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Indeed, we do find home advantage in FPL points for all four positions. Midfielders seem to have the largest difference (as well as the highest number of points on average). The overall statistics are also interesting. Midfielders playing at home (who are selected by at least 0.5% of managers) score a little over 4 FPL points in the average gameweek.</p>
+
+
 </section>
 
-</main>
-<!-- /main column -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
