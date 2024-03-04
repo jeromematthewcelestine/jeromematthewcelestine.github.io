@@ -1,2 +1,6 @@
 *.xcf
 .DS_Store
+*/.DS_Store
+fpl_home_advantage/.DS_Store
+fpl_home_advantage/FPL_Home_Advantage_files/.DS_Store
+fpl_home_advantage/FPL_Home_Advantage_files/libs/.DS_Store
