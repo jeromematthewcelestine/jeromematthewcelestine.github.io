@@ -1,14 +1,82 @@
 body {
-    font-family: Helvetica, Arial, sans-serif;
+    
     background-color: white;
+    color: black;
+    height: 100%;
+    min-height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.main {
+    max-width: 700px;
+    margin: 0 auto;
+    padding-left: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 0;
+    background-color: white;
+    
+    border-left: 1px solid lightgray;
+    height: 100%;
+    min-height: 100%;
+
+    display: flex;
+    flex-direction: column;
+}
+
+a {
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+    color: darkolivegreen;
+}
+a.header_link {
     color: black;
 }
 
-h1 {
-    font-family: 'Kingthings_Petrock', serif;
-    color: maroon;
+.main_header {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 3rem;
 }
-h2 { 
-    font-family: 'Kingthings_Petrock', serif;
-    color: maroon;
+
+.post_list_and_header {
+    margin-bottom: 3rem;
+}
+.post_list_header {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+.post_list {
+    display: flex;
+    flex-direction: column;
+}
+.post_item {
+    display: flex;
+    flex-direction: right;
+}
+.post_item_left {
+    margin: 10 0 10 0;
+}
+.post_item_right {
+    margin: 0 0;
+}
+.post_item_title {
+    font-size: 1rem;
+    font-weight: bold;
+    margin: 0.5rem;
+    color: black;
+}
+.post_item_description {
+    font-size: 1rem;
+    margin: 0.5rem;
+}
+.thumbnail_image {
+    border: 1px solid black;
+}
+
+
+
+ul {
+    padding: 0 1rem;
 }
