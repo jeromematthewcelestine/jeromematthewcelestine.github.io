@@ -1,0 +1,207 @@
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <meta language="en"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <meta name="description" content="Jerome Williams's personal website"/>
+    <meta name="author" content="Jerome Williams"/>
+    
+
+    <title>Predicting BGG ratings from boardgame descriptions - jeromewilliams.net</title>
+    <link rel="stylesheet" href="../article_style.css" type="text/css"/>
+  </head>
+  <body>
+
+    <div class="main">
+  
+      <div class="back_links_top">
+        <a href="/">back to jeromewilliams.net</a>
+      </div>
+
+      <div class="article_container">
+        <h1 id="article_title">Predicting BGG ratings from boardgame descriptions</h1>
+        <div class="article_date">
+          Last updated: 2024 April 9. 
+        </div>
+
+        <div class="article_summary">
+          <ul>
+            <li><p>I fine-tune a transformer-based model on boardgame descriptions to predict games' average ratings on BoardGameGeek.com</p></li>
+            <li><p>The trained model achieves root mean squared error of approximately 1.1. (BGG ratings are on a 10-point scale.)</p></li>
+          </ul>
+        </div>
+
+        <div class="article_content">
+          
+
+
+<h2 id="introduction">Introduction</h2>
+<p>
+  BoardGameGeek.com (BGG) is  boardgame website that provides a database of boardgames and allows users to post ratings and reviews. 
+  For each boardgame, BGG provides an average of user ratings. BGG also provides a textual description for each game, which may be provided by the game's publisher or designer, or may be contributed by users of the site.
+</p>
+<p>
+  In this note, I describe my use of a transformer-based model to predict the average ratings of boardgames on BGG using the textual descriptions of the games.
+</p>
+  
+<h2 id="data">Data</h2>
+<p>I use data from <a href="https://boardgamegeek.com">BoardGameGeek.com</a>, which I downloaded from a <a href="https://www.kaggle.com/datasets/threnjen/board-games-database-from-boardgamegeek">Kaggle page</a>. I also use BoardGameGeek data as used in a <a href="https://github.com/rfordatascience/tidytuesday/tree/master/data/2022/2022-01-25">Tidy Tuesday project in January 2022</a>. Both datasets were created by accessing the BoardGameGeek.com API. I combine the two datasets because the Tidy Tuesday version contains original description text, while the Kaggle version includes more detailed information on ratings.</p>
+
+<p>After merging the two datasets, we have 21,375 boardgames.</p>
+
+<h3 id="preprocessing">Rating data</h3>
+<p>
+  I bin the boardgame ratings into 5 bins of equal size. The rating bins are as follows:
+</p>
+  <table>
+    <thead>
+      <tr>
+        <th>Rating bin</th>
+        <th>Range</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>1.0-5.68</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>5.68-6.21</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>6.21-6.66</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>6.66-7.18</td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td>7.18-10.0</td>
+      </tr>
+    </tbody>
+  </table>
+
+<p>Figure 1 below plots the distribution of average ratings, as well as the edges of the five equally-sized rating bins.</p>
+
+<div class="figure_div">
+  <div class="figure_heading">FIGURE 1</div>
+  <div class="figure_content">
+    <img class="figure_image" src="images/00_ratings_distribution.png" alt="Rating distribution" width="75%"/>
+  </div>
+</div>
+
+  <h3 id="text-data">Description data</h3>
+
+<p>
+  Boardgames descriptions are tokenized using the bert-base-cased tokenizer. The plot below shows the distribution of tokenized description lengths. (Descriptions are truncated at 512 tokens.) Figure 2 below 
+</p>
+
+<div class="figure_div">
+  <div class="figure_heading">FIGURE 2</div>
+  <div class="figure_content">
+    <img 
+    class="figure_image" 
+    src="images/01_description_lengths.png"
+    alt="Distribution of tokenized description lengths" 
+    width="75%"/>
+  </div>
+</div>
+
+
+
+<h2 id="model">Model</h2>
+<p>I fine-tune a transformer-based model on the boardgame descriptions to predict the average ratings of the games. I use the <a href="https://arxiv.org/abs/1810.04805">BERT</a> pre-trained model, which is a transformer-based model, trained on a corpus of English texts on masked language modeling and next sentence prediction tasks. I use the <a href="https://huggingface.co/google-bert/bert-base-cased">bert-base-cased</a> version of BERT, as made available on HuggingFace.com.</p>
+
+
+<h2 id="results">Findings</h2>
+
+<h3 id="model-performance">The BERT-based model is relatively successful</h3>
+
+<p>The transformer-based model does have some success in predicting the average boardgame rating. Accuracy for the test set is approximately 0.35, while random guessing would result in accuracy of 0.2 (since we have five rating bins).</p>
+
+<p>However, performance is not as good as the <a href="">characteristics-based model for boardgame ratings</a> we trained previously. The root mean squared error (RMSE) is approximately 2.1 for the transformer-based model, as compared to RMSE of 0.66 from the <a href="">characteristics-based model for boardgame ratings</a>.</p>
+
+<p>Figure 3 below plots a confusion matrix for the transformer-based model's predictions on the test set. The confusion matrix shows combinations of actual and predicted ratings. As Figure 3 shows, the model does reasonably well at separating observations with very low and very high ratings (rating bins 1 and 5) but does less well for observations in the middle. The models seems especially reluctant to predict rating bins 2 and 4.</p>
+
+<div class="figure_div">
+  <div class="figure_heading">FIGURE 3</div>
+  <div class="figure_content">
+    <img 
+    class="figure_image" 
+    src="images/03_confusion_matrix_full.png"
+    alt="Confusion matrix for transformer-based model" 
+    width="75%"/>
+  </div>
+</div>
+
+
+<h3 id="model-interpretation">Is description length sufficient?</h3>
+
+<p>
+  One possible question is whether the transformer-based model is simply using description length to predict ratings. As Figure 4 below shows, there is a relationship between description length and average rating.
+
+  <div class="figure_div">
+    <div class="figure_heading">FIGURE 4</div>
+    <div class="figure_content">
+      <img 
+      class="figure_image" 
+      src="images/04b_rating_vs_desc_length_full.png"
+      alt="Scatterplot of average rating against log description length showing a slight positive relationship" 
+      width="75%"/>
+    </div>
+  </div>
+
+
+<p>
+  I train a simple decision tree model using only the description length as a feature.
+  The description-length-only model achieves RMSE on the test set of 1.8, an improvement on 2.1, the RMSE achieved by the transformer-based model. The confusion matrix for the description-length-only model is shown in Figure 5 below.
+</p>
+<div class="figure_div">
+  <div class="figure_heading">FIGURE 5</div>
+  <div class="figure_content">
+    <img 
+    class="figure_image" 
+    src="images/05_confusion_matrix_desc_length_only_full.png"
+    alt="" 
+    width="75%"/>
+  </div>
+</div>
+
+<p>As Figure 5 shows, the description-length-only model, like the transformer-based model, is most accurate for observations in rating bin 1 or 5.
+</p>
+
+<h2 id="summary">Summary</h2>
+<p>
+  The table below summarizes the performance of the three models we have trained to predict boardgame ratings.
+
+  <table>
+    <thead>
+      <tr> <th>Model</th>  <th>RMSE</th> </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Characteristics-based model (XGBoost)</td>  <td>0.66</td>
+      </tr>
+      <tr>
+        <td>Transformer-based model (BERT)</td>      <td>2.1</td>
+      </tr>
+      <tr>
+        <td>Description-length-only model (Decision tree)</td><td>1.8</td>
+      </tr>
+    </tbody>
+  </table>
+</p>
+
+          
+    </div>
+
+    <div class="back_links_bottom">
+      <a href="/">back to jeromewilliams.net</a>
+    </div>
+
+  </body>
+</html>
