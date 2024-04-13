@@ -22,13 +22,14 @@
       <div class="article_container">
         <h1 id="article_title">Predicting BGG ratings from boardgame descriptions</h1>
         <div class="article_date">
-          Last updated: 2024 April 9. 
+          Last updated: 2024 April 13. 
         </div>
 
         <div class="article_summary">
           <ul>
-            <li><p>I fine-tune a transformer-based model on boardgame descriptions to predict games' average ratings on BoardGameGeek.com</p></li>
-            <li><p>The trained model achieves root mean squared error of approximately 1.1. (BGG ratings are on a 10-point scale.)</p></li>
+            <li><p>I attempt to fine-tune a transformer-based model on boardgame descriptions from BoardGameGeek.com to predict games' average ratings.</p></li>
+            <li><p>The model performs better than random guessing, with an accuracy of 0.35 on the test set (compared to a baseline of 0.2 for random guessing).</p></li>
+            <li><p>However, the model performs worse than an XGBoost model trained on boardgame metadata (player count, playing time, etc.) and decision tree model using description length only.</p></li>
           </ul>
         </div>
 
