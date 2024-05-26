@@ -22,16 +22,16 @@
       <div class="article_container">
         <h1 id="article_title">Home advantage in Fantasy Premier League</h1>
         <div class="article_date">
-          Last updated: 2024 March 8. See <a href="/pages/2024-03-04-fpl-home-advantage-notebook/">R notebook</a>.
+          Last updated: 2024 May 26. See <a href="/pages/2024-03-04-fpl-home-advantage-notebook/">R notebook</a>.
         </div>
 
         <div class="article_summary">
           <ul>
-            <li><p>Home advantage generally exists in FPL: players score more FPL points when
+            <li><p>Home advantage exists in FPL: players score more FPL points when
             their team plays at home than when their team plays away.</p></li>
             <li><p>FPL home advantage did not exist in the 2020/21 behind-closed-doors season.</p></li>
             <li><p>Almost all FPL point-scoring actions exhibit home advantage:
-            players register more goals, assists, clean sheets, and bonus points at home than away. Players also concede fewer goals and receive fewer yellow cards at home.</p></li>
+            when playing at home, players register more goals, assists, clean sheets, and bonus points, concede fewer goals, and receive fewer yellow cards.</p></li>
             <li><p>FPL home advantage exists across all player
             positions (goalkeeper, defender, midfielder, and forward).</p></li>
           </ul>
@@ -47,7 +47,7 @@
 
 <h2 id="introduction">Introduction</h2>
 <p>Home advantage is the tendency of teams to perform better when
-playing at home than when playing away. Home advantage has been
+playing at home than they do when playing away. Home advantage has been
 documented across many sports, including soccer, basketball, cricket,
 hockey, rugby, and American football (<a
 href="https://www.chicagobooth.edu/review/home-field-advantage-facts-and-fiction">Chicago
@@ -64,7 +64,7 @@ League matches. Participants in FPL (managers) select a squad of 15
 players within a budget and choose 11 players from the squad to play in each gameweek (where a "gameweek" corresponds roughly to a round of Premier League matches). Points
 are scored for a variety of actions, including goals, assists, clean
 sheets, and bonus points. Managers can make transfers and substitutions throughout the season.</p>
-<p>It is conventional wisdom among FPL managers that, because home advantage exists in soccer at a team level, home advantage also exists in FPL at the level of individual players. In this short note, I describe some features of the FPL data. For a step-by-step description of what I did, see the corresponding <a href="/pages/2024-04-04-fpl-home-advantage-notebook">R notebook</a>.</p>
+<p>It is conventional wisdom among FPL managers that, because home advantage exists in soccer at a team level, home advantage also exists in FPL at the level of individual players. In this note, I explore whether this is actually the case. For a step-by-step description of what I did, see the corresponding <a href="/pages/2024-03-04-fpl-home-advantage-notebook">R notebook</a>.</p>
 <h2 id="data">Data</h2>
 I use three datasets:
 <ul>
@@ -88,29 +88,23 @@ href="https://allaboutfpl.com/2022/06/number-of-people-who-played-fpl-each-seaso
 
 <p>Home advantage exists in FPL: players score more FPL points when
 their team plays at home than when their team plays away. 
-Setting aside 2020/21 and 2021/22, players score an average 
+Setting aside the 2020/21 and 2021/22 seasons, players score an average 
 of 3.3-4.5 FPL points when playing at home and score only an average of 2.7-3.2 when playing away.
-However, home advantage in FPL points was nonexistent in the 2020/21 season (when many matches were played without crowds) and continued to be lower than normal in 2021/22.</p>
+Home advantage in FPL points was nonexistent in the 2020/21 season (when many matches were played without crowds) and continued to be lower than normal in 2021/22.</p>
 
 <center>
   <img src="images/home_adv_fpl_pts-1.png" alt="" />
   </center>
 <p>Note that in the analysis above and in what follows, I exclude all
-player/gameweek observations where <em>Percent selected by</em> is less
-than 0.5%, i.e., where a player is selected in a particular gameweek by less than 0.5% of
-participating managers. I make this exclusion because the FPL game includes
-teams' full squads, which typically include many players (such as third
+player/gameweek observations where the player was selected in their squad by fewer than 0.5% of managers. I make this exclusion because the FPL game includes many players (such as third
 choice goalkeepers and youth players) who register very few minutes of
 play, if any, during the course of a season. By excluding players with
-low selection rates, I attempt to exclude these low-minutes players.
-Additionally, players with low selection rates are not very relevant to
-FPL.</p>
-<center>
-<img src="images/home_adv_by_position-1.png" alt="" />
-</center>
-<p>Home advantage exists for all four player positions (goalkeeper,
-defender, midfielder, and forward).</p>
+low selection rates, I attempt to exclude these low-minutes players, who tend to have very little impact on managers' FPL scores.</p>
+
 <h3 id="sources-of-home-advantage">Sources of home advantage</h3>
+
+
+
 <p>FPL points are based on a variety of different point-scoring actions,
 listed in the table below.</p>
 <center>
@@ -192,32 +186,32 @@ gameweek/player) is slightly higher for home games than for away games.
 The difference is small, however—approximately 68.5 minutes for home
 games vs 67.75 minutes for away games—and is therefore unlikely to be
 meaningful for FPL points.</p>
+
+<center>
+  <img src="images/home_adv_by_position-1.png" alt="" />
+  </center>
+  <p>Unsurprisingly, given that all home advantage exists for almost all point-scoring actions, it is also the case that home advantage exists for all four player positions (goalkeeper,
+  defender, midfielder, and forward).</p>
+
 <h2 id="do-fpl-managers-take-advantage-of-home-advantage">Do FPL
 managers take advantage of home advantage?</h2>
 <center>
 <img src="images/mngr_selection_home_vs_away-1.png" alt="" />
 </center>
 <p>
-Given that home advantage exists in FPL, we might expect FPL managers to be more likely to select players with home fixtures than players with away fixtures. However, the plot above indicates that this is not the case, at least for managers’ squad selection decisions: FPL managers are not more likely to select players with home fixtures than players with away fixtures.
+Given that home advantage exists in FPL, we might expect FPL managers to be more likely to select players with home fixtures than players with away fixtures. However, at least for managers’ squad selection decisions, this is not the case: FPL managers are not more likely to select players with home fixtures in their squads of 15.
 </p>
-<p>Of course, ideally, when assessing this question, we would also account for the selection of players in
-each manager's <i>first team of 11 players</i> each gameweek, and not just the selection of players in the squad of 15 players.
-</p><p>Every gameweek, managers must choose 11 players from their squad of 15 to “play” in that
-gameweek (i.e., to score points for the maanger's team). The remaining four
-players are on the manager’s “bench” and will only score points if one or more players from
-the first team of 11 fails to register a single minute of play that
-gameweek.</p>
-<p>It seems likely that managers may account for home and away
-fixtures in the playing/benching decisions more so than in their overall
-squad selection decisions. Managers are restricted to a single ‘free’
+<p>Of course, ideally we would also account for the selection of players in
+each manager's <i>first team of 11 players</i> each gameweek, and not just the selection of players in the squad of 15 players. </p><p>Every gameweek, managers must choose 11 players from their squad of 15 to “play” in that
+gameweek (i.e., to score points for the manager's team). It seems likely that managers might take home advantage into account more in the playing/benching decisions than in squad selection decisions. Managers are restricted to a single ‘free’
 transfer each gameweek—subsequent transfers cost 4 points each—meaning that
 squads change slowly over time and players are typically held by
-managers for multiple gameweeks (during which they will likely play both
-home and away matches). Thus, it is potentially difficult for managers to take home and away fixtures into account when selecting players for their squads of 15.</p>
+managers for multiple gameweeks, during which the players are likely to play both
+home and away matches. Thus, it is potentially difficult for managers to take home and away fixtures into account when selecting players for their squads of 15.</p>
 
 <p>However, our FPL dataset includes data only on
-selection in the squad of 15 (our ‘Percent selected by’ variable) and
-not on selection in each manager’s first 11 every gameweek.</p>
+selection in the squad of 15  and
+not on selection in each manager’s first 11 every gameweek, so analysis of the playing/benching decision is not possible, given the data.</p>
 
           
     </div>
